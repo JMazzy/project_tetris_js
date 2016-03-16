@@ -5,7 +5,7 @@ MODELS.model = {
   // check if coordinates overlap filled space
   // blockList: [],
   boardHeight: 24,
-  boardWidth: 12,
+  boardWidth: 10,
   board: [],
 
   init: function() {
@@ -48,7 +48,7 @@ MODELS.model = {
       for(var col = 0; col < this.currentBlock.grid[row].length; col++) {
         var boardX = this.currentBlock.left + col;
         var boardY = this.currentBlock.top + row;
-        var leftBorder = this.board[boardY][boardX - 1];
+        var leftBorder = this.board[boardY] ? this.board[boardY][boardX - 1] : false;
         if ( this.currentBlock.grid[row][col] && ( leftBorder || boardX - 1 < 0 ) ) {
           validMove = false;
         };
@@ -66,7 +66,7 @@ MODELS.model = {
       for(var col = 0; col < this.currentBlock.grid[row].length; col++) {
         var boardX = this.currentBlock.left + col;
         var boardY = this.currentBlock.top + row;
-        var rightBorder = this.board[boardY][boardX + 1];
+        var rightBorder = this.board[boardY] ? this.board[boardY][boardX + 1] : false;
         if ( this.currentBlock.grid[row][col] && ( rightBorder || boardX + 1 > this.boardWidth - 1 ) ) {
           validMove = false;
         };
@@ -86,6 +86,7 @@ MODELS.model = {
           var boardY = this.currentBlock.top + row;
           if (  this.currentBlock.grid[row][col] && (
                 this.atBottom(boardY) || this.board[boardY + 1][boardX] ) ) {
+            controller.decreaseInterval();
             this.stopBlock();
             this.generateBlock();
             return true;

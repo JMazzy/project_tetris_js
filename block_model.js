@@ -9,6 +9,13 @@ MODELS.Block = function() {
 
   this.top = 0;
   this.left = Math.floor( Math.random() * 7 + 1 );
+
+  var rotations = Math.floor(Math.random() * 4)
+
+  for ( var r = 0; r < rotations; r++ ) {
+    this.rotate();
+  }
+
 };
 
 MODELS.Block.prototype.emptyGrid = function(rows) {

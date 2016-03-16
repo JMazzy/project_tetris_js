@@ -1,8 +1,16 @@
 #tetris-canvas {
-  border: 2px solid black;
+  border: 5px solid #111;
 }
 
 body {
   text-align: center;
   font-family: sans-serif;
+  background-color: #eee;
+  font-family: 'Cabin', sans-serif;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 25px;
+  margin: 0;
 }

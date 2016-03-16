@@ -14,6 +14,9 @@ var view = {
     var blockYStart = (row - 4) * this.blockSize;
     this.context.fillStyle = color;
     this.context.strokeStyle = "#000";
+    this.context.lineWidth = 5;
+    this.context.lineJoin="round";
+    this.context.lineCap="round";
     this.context.fillRect(blockXStart, blockYStart, this.blockSize, this.blockSize);
     this.context.strokeRect(blockXStart, blockYStart, this.blockSize, this.blockSize);
   },
@@ -74,6 +77,8 @@ var view = {
 
   update: function(board, block, score) {
     this.context.clearRect(0, 0, MODELS.model.boardWidth * this.blockSize, MODELS.model.boardHeight * this.blockSize);
+    this.context.fillStyle = "#eee";
+    this.context.fillRect(0, 0, MODELS.model.boardWidth * this.blockSize, MODELS.model.boardHeight * this.blockSize);
     this.drawBlocks(board, block);
     this.drawScore(score);
   },

@@ -1,12 +1,30 @@
 var controller = {
   init: function() {
+    var d = new Date();
+    this.lastTime = d.getTime();
+    this.moveInterval = 600; //ms
     MODELS.model.init();
     view.init();
   },
 
+  decreaseInterval: function() {
+    if ( this.moveInterval > 100 ) {
+      this.moveInterval--;
+    }
+  },
+
   update: function() {
-    MODELS.model.update();
-    view.update( MODELS.model.board, MODELS.model.currentBlock, MODELS.model.score );
+    var d = new Date();
+    var newTime = d.getTime();
+    var deltaTime = newTime - this.lastTime;
+
+    // Only update if enough time has elapsed
+    if ( deltaTime > this.moveInterval ) {
+      this.lastTime = newTime;
+      MODELS.model.update();
+      view.update( MODELS.model.board, MODELS.model.currentBlock, MODELS.model.score );
+    }
+
   },
 
   moveRight: function() {
@@ -29,10 +47,3 @@ var controller = {
     view.showLossMessage();
   },
 }
-
-$( document ).ready( function() {
-  controller.init();
-  setInterval( function() {
-    controller.update();
-  }, 250);
-});
