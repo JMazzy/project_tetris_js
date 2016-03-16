@@ -7,8 +7,6 @@ var model = {
   boardHeight: 24,
   boardWidth: 10,
   board: [],
-  fallingBlock: undefined,
-  blockFalling: false,
 
   init: function() {
     for(var i=0; i < this.boardHeight; i++) {
@@ -16,17 +14,6 @@ var model = {
     };
     this.board.push([1,1,1,1,1,1,1,1,1,1]);
     this.generateBlock("leftL",0,3);
-  },
-
-  currentLevel: function(column) {
-    row = this.boardHeight - 1;
-    console.log(this.board[row][column]);
-    console.log('Row: ' + row);
-    console.log('Column: ' + column);
-    while (this.board[row][column]) {
-      row--;
-    }
-    return row;
   },
 
   update: function() {
@@ -43,6 +30,8 @@ var model = {
       }
     }
     this.currentBlock.top++;
+
+    this.checkLines();
   },
 
   stopBlock: function() {
@@ -97,6 +86,21 @@ var model = {
     if (validMove) {
       this.currentBlock.left++;
     };
+  },
+
+  checkLines: function() {
+    for(var row = 0; row < this.boardHeight; row++) {
+      var blockTally = 0;
+      for(var col = 0; col < this.boardWidth; col++) {
+        if (this.board[row][col] === 1) {
+          blockTally++;
+        }
+      }
+      if ( blockTally === this.boardWidth ) {
+        this.board.splice(row, 1);
+        this.board.splice(0,0,[0,0,0,0,0,0,0,0,0,0]);
+      }
+    }
   }
 
 }

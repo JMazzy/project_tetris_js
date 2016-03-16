@@ -1,16 +1,17 @@
 var MODELS = MODELS || {};
 
-MODELS.Block = function(type, x, y) {
+MODELS.Block = function() {
+  var type = MODELS.pieceTypes[ Math.floor( Math.random() * MODELS.pieceTypes.length ) ];
   this.grid = [];
   for ( var i = 0; i < MODELS.pieces[type].length; i++ ) {
     this.grid[i] = MODELS.pieces[type][i];
   };
 
-  this.top = y;
-  this.left = x;
-
-
+  this.top = 0;
+  this.left = 3;
 };
+
+MODELS.pieceTypes = [ "square", "line", "rightL", "leftL", "leftS", "rightS", "tPiece" ];
 
 MODELS.pieces = {
 

@@ -14,5 +14,5 @@ $( document ).ready( function() {
   controller.init();
   setInterval( function() {
     controller.update();
-  }, 100);
+  }, 250);
 });

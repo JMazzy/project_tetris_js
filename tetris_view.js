@@ -12,7 +12,9 @@ var view = {
     var blockXStart = j * 20;
     var blockYStart = i * 20;
     this.context.fillStyle = '#FF0000';
+    this.context.strokeStyle = "#000";
     this.context.fillRect(blockXStart, blockYStart, 20, 20);
+    this.context.strokeRect(blockXStart, blockYStart, 20, 20);
   },
 
   drawBlocks: function(board, block) {
