@@ -8,8 +8,20 @@ MODELS.Block = function() {
   };
 
   this.top = 0;
-  this.left = 3;
+  this.left = Math.floor( Math.random() * 7 );
 };
+
+MODELS.Block.prototype.rotate = function() {
+  var newGrid = [[],[],[],[]];
+  for ( var row = 0; row < 4; row++ ) {
+    for ( var col = 0; col < 4; col++ ) {
+      newGrid[col][row] = this.grid[row][col];
+    }
+  }
+  for ( var i = 0; i < 4; i++ ) {
+    this.grid[i] = newGrid[i];
+  };
+}
 
 MODELS.pieceTypes = [ "square", "line", "rightL", "leftL", "leftS", "rightS", "tPiece" ];
 

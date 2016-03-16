@@ -21,7 +21,6 @@ var model = {
       for(var j = 0; j < 4; j++) {
         var boardX = this.currentBlock.left + j;
         var boardY = this.currentBlock.top + i;
-        console.log(this.currentBlock.grid)
         if ( this.currentBlock.grid[i][j] === 1 && this.board[boardY + 1][boardX] === 1 ) {
           this.stopBlock();
           this.generateBlock("square",0, 3);
@@ -48,7 +47,6 @@ var model = {
   },
 
   generateBlock: function(type,y,x) {
-    console.log("generating block")
     this.currentBlock = new MODELS.Block(type,x,y);
   },
 
@@ -101,6 +99,10 @@ var model = {
         this.board.splice(0,0,[0,0,0,0,0,0,0,0,0,0]);
       }
     }
-  }
+  },
+
+  rotate: function() {
+    this.currentBlock.rotate();
+  },
 
 }

@@ -1,7 +1,8 @@
 var view = {
 
   init: function() {
-    var myCanvas = "<canvas id='tetris-canvas' width='" + (model.boardWidth * 20) + "' height='" + (model.boardHeight * 20) + "'></canvas>";
+    this.blockSize = 36;
+    var myCanvas = "<canvas id='tetris-canvas' width='" + (model.boardWidth * this.blockSize) + "' height='" + (model.boardHeight * this.blockSize) + "'></canvas>";
     $('.game-board').append(myCanvas);
     this.canvas = $('#tetris-canvas');
     this.context = this.canvas[0].getContext('2d');
@@ -9,12 +10,12 @@ var view = {
   },
 
   drawBlock: function(i, j) {
-    var blockXStart = j * 20;
-    var blockYStart = i * 20;
-    this.context.fillStyle = '#FF0000';
+    var blockXStart = j * this.blockSize;
+    var blockYStart = i * this.blockSize;
+    this.context.fillStyle = '#1188bb';
     this.context.strokeStyle = "#000";
-    this.context.fillRect(blockXStart, blockYStart, 20, 20);
-    this.context.strokeRect(blockXStart, blockYStart, 20, 20);
+    this.context.fillRect(blockXStart, blockYStart, this.blockSize, this.blockSize);
+    this.context.strokeRect(blockXStart, blockYStart, this.blockSize, this.blockSize);
   },
 
   drawBlocks: function(board, block) {
@@ -38,25 +39,25 @@ var view = {
   },
 
   update: function(board, block) {
-    this.context.clearRect(0, 0, model.boardWidth * 20, model.boardHeight * 20);
+    this.context.clearRect(0, 0, model.boardWidth * this.blockSize, model.boardHeight * this.blockSize);
     this.drawBlocks(board, block);
     this.context.fillStyle = "#555";
-    this.context.fillRect( 0, 0, model.boardWidth * 20, 40 );
+    this.context.fillRect( 0, 0, model.boardWidth * this.blockSize, 2 * this.blockSize );
   },
 
   moveListener: function() {
     $(window).on('keydown', function() {
       switch (event.which) {
         case 37:
-          console.log('left');
           model.moveBlockLeft();
           break;
         case 39:
-          console.log('right');
           model.moveBlockRight();
           break;
+        case 38:
+          model.rotate();
+          break
         default:
-          console.log(event.which);
           break;
       }
     })
