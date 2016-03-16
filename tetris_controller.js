@@ -1,13 +1,33 @@
 var controller = {
   init: function() {
-    model.init();
+    MODELS.model.init();
     view.init();
   },
 
   update: function() {
-    model.update();
-    view.update( model.board, model.currentBlock );
-  }
+    MODELS.model.update();
+    view.update( MODELS.model.board, MODELS.model.currentBlock, MODELS.model.score );
+  },
+
+  moveRight: function() {
+    MODELS.model.moveBlockRight();
+  },
+
+  moveLeft: function() {
+    MODELS.model.moveBlockLeft();
+  },
+
+  moveDown: function() {
+    MODELS.model.moveDown();
+  },
+
+  rotate: function() {
+    MODELS.model.rotate();
+  },
+
+  lose: function() {
+    view.showLossMessage();
+  },
 }
 
 $( document ).ready( function() {
