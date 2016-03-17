@@ -22,8 +22,9 @@ var controller = {
     if ( deltaTime > this.moveInterval ) {
       this.lastTime = newTime;
       MODELS.model.update();
-      view.update( MODELS.model.board, MODELS.model.currentBlock, MODELS.model.score );
     }
+
+    view.update( MODELS.model.board, MODELS.model.currentBlock, MODELS.model.score );
 
   },
 
